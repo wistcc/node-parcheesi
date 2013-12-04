@@ -108,10 +108,17 @@ module.exports = function ParcheesiGame(options) {
             }
 
             //Only if the dice roll is associated with a player the remaininDiceThrow counter is decreased
-            if (playerIndex !== undefined)
+            if (playerIndex !== undefined) {
                 remainingDiceThrows--;
 
+                //Get another turn for a double
+                if (lastDiceRoll[0] === lastDiceRoll[1]) {
+                    remainingDiceThrows++;
+                }
+            }
+
             return this.lastDiceThrow();
+
         },
 
         getStartingSpace: function(colorName) {
@@ -136,7 +143,6 @@ module.exports = function ParcheesiGame(options) {
             }
 
             var lastEntry = this.moveLog[moveCounter];
-
             if (lastEntry === undefined) {
                 //TODO: This should be a class instance as well, to avoid repetition
                 lastEntry = {
@@ -150,15 +156,15 @@ module.exports = function ParcheesiGame(options) {
                 pawn: pawnIndex,
                 value: diceRoll,
             });
-
             var allDiceMovesUsed = this.lastDiceThrow().length === lastEntry.usedMoves.length;
 
-            //If player has used all possible moves, change the turn
+            //If player has used all possible moves
             if (allDiceMovesUsed && remainingDiceThrows === 0) {
                 currentTurn = (currentTurn === realNumberOfPlayers - 1) ? 0 : currentTurn + 1;
                 moveCounter += 1;
                 remainingDiceThrows = 1;
             }
+
         },
 
         enterPawn: function(playerIndex) {

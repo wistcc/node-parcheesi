@@ -50,16 +50,16 @@ describe('Parcheesi Core', function() {
             }
         });
 
-        it.skip('should have entry points for each stair color', function () {
+        it('should have entry points for each stair color', function () {
             //TODO: PENDING
             assert.fail();
         });
 
-        it.should('should have a heaven (last spot a player can play to)', function() {
+        it.skip('should have a heaven (last spot a player can play to)', function() {
             assert.fail();
         });
 
-        it('should enter pawns into their respective stairs when reached', function (done) {
+        it('should enter pawns into their respective stairs when reached', function () {
             game = new ParcheesiGame({
                 startingTurn: 0,
                 dices: [new dice(4), new dice(5)]
