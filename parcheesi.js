@@ -38,7 +38,6 @@ module.exports = function ParcheesiGame(options) {
 
         return players;
     },
-
     generateSpaces = function() {
         var spaces = new Array(68);
 
@@ -50,8 +49,8 @@ module.exports = function ParcheesiGame(options) {
                 (i === quarterSection * 17 + 12));
 
             var startingSpace = (i === quarterSection * 17 + 5) ? CONSTANTS.colors[quarterSection] : false;
-
-            spaces[i] = new Space(i, isSpecial, startingSpace);
+            var endingSpace = (i === quarterSection * 17) ? CONSTANTS.colors[quarterSection] : false;
+            spaces[i] = new Space(i, isSpecial, startingSpace, endingSpace);
         }
         return spaces;
     },
@@ -122,16 +121,22 @@ module.exports = function ParcheesiGame(options) {
         },
 
         getStartingSpace: function(colorName) {
-            var filtered = _und.filter(this.spaces, function(item) {
+            var filtered = _und.find(this.spaces, function(item) {
                 return item.isStartingSpace() === colorName;
             });
 
-            return _und.first(filtered);
+            return filtered;
+        },
+
+        getStairEntrySpace: function(colorName){
+            var filtered = _und.find(this.spaces, function(item){
+                return item.isStairEntrySpace() === colorName;
+            });
+            return filtered;
         },
 
         drawBoard: function() {
-            //TODO: Assign an issue on github to draw the board!
-            console.log('someday a board will be drawn here');
+            console.log('someday a board will be drawn here!');
         },
 
         manageTurn: function(playerIndex, pawnIndex, nextPosition, diceRoll) {

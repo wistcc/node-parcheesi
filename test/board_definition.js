@@ -51,12 +51,20 @@ describe('Parcheesi Core', function() {
         });
 
         it('should have entry points for each stair color', function () {
-            //TODO: PENDING
-            assert.fail();
+            for (var i = CONSTANTS.colors.length - 1; i >= 0; i--) {
+                assert.notEqual(game.getStairEntrySpace(CONSTANTS.colors[i].name), false);
+                assert.notEqual(game.getStairEntrySpace(CONSTANTS.colors[i].name), undefined);
+            }
         });
 
         it.skip('should have a heaven (last spot a player can play to)', function() {
             assert.fail();
+        });
+
+        it('should have a draw function', function(){
+            (function(){
+                game.drawBoard();
+            }).should.not.throw();
         });
 
         it('should enter pawns into their respective stairs when reached', function () {
