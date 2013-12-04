@@ -3,7 +3,7 @@
 
 'use strict';
 
-module.exports = function Space(i, createAsSafe, startPointColor) {
+module.exports = function Space(i, createAsSafe, startPointColor, endPointColor) {
     //TODO: Convert this to a real module and define the methods using prototype object
     //(makeClass method instead of calling this same sentence on each class declaration)
 
@@ -23,9 +23,13 @@ module.exports = function Space(i, createAsSafe, startPointColor) {
             return startPointColor;
         },
 
+        isStairEntrySpace: function(){
+            return endPointColor;
+        },
+
         currentIndex: function() {
             return i;
-        }
+        },
     };
 
     return space;

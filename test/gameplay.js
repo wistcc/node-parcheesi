@@ -213,8 +213,20 @@ describe('Parcheesi Core', function() {
             assert.fail();
         });
 
-        it.skip('should assign the player another turn if a double is rolled', function() {
-            assert.fail();
+        it('should assign the player another turn if a double is rolled', function() {
+            game = new ParcheesiGame({
+                startingTurn: 0,
+                numberOfPlayers: 3,
+                dices: [new dice(5), new dice(5)]
+            });
+
+            testUtils.positionPawnOnStart(game, 0);
+            testUtils.positionPawnOnStart(game, 1);
+            testUtils.positionPawnOnStart(game, 2);
+
+            testUtils.emulatePlay(game, 0);
+
+            game.currentTurn().should.eql(0);
         });
 
         it.skip('should punish the player if three doubles are rolled consecutively', function() {
