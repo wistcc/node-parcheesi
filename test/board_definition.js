@@ -5,9 +5,9 @@
 
 'use strict';
 
-var assert = require('assert'),
+var CONSTANTS = require('./../constants'),
+    assert = require('assert'),
     testUtils = require('./test_utils'),
-    CONSTANTS = require('./../constants'),
     dice = require('./../dice'),
     ParcheesiGame = require('./../parcheesi');
 
@@ -50,8 +50,25 @@ describe('Parcheesi Core', function() {
             }
         });
 
-        it.skip('should have a heaven (last spot a player can play to)', function() {
+        it.skip('should have entry points for each stair color', function () {
+            //TODO: PENDING
             assert.fail();
+        });
+
+        it.should('should have a heaven (last spot a player can play to)', function() {
+            assert.fail();
+        });
+
+        it('should enter pawns into their respective stairs when reached', function (done) {
+            game = new ParcheesiGame({
+                startingTurn: 0,
+                dices: [new dice(4), new dice(5)]
+            });
+
+            var pawn = testUtils.positionPawn(game, 0, 0, 66);
+            game.throwDices();
+
+            pawn.position.should.eql(103);
         });
 
         it('should have safe places distribuited across the general playfield', function() {
@@ -79,20 +96,22 @@ describe('Parcheesi Core', function() {
             (function() {
                 game.movePawn(0, 0, 4); //Player 0, Pawn 0, to be moved 4 spaces
             })
-            .should.throw ('Pawn is still inside player\'s home');
+                .should.
+            throw ('Pawn is still inside player\'s home');
         });
 
-        it('should detect ilegal moves (pawn wasn\'t in allocated space', function () {
+        it('should detect ilegal moves (pawn wasn\'t in allocated space', function() {
             var pawn = game.players[0].pawns[0];
             pawn.position = 5;
 
             (function() {
                 game.movePawn(0, 0, 4); //Player 0, pawn 0, to be moved 4 spaces    
             })
-            .should.throw();
+                .should.
+            throw ();
         });
 
-        it('should detect ilegal move (player doesn\'t exist)' , function () {
+        it('should detect ilegal move (player doesn\'t exist)', function() {
             game = new ParcheesiGame({
                 numberOfPlayers: 2
             });
@@ -101,16 +120,18 @@ describe('Parcheesi Core', function() {
             pawn.position = 5;
 
             (function() {
-                game.movePawn(3,0,4); //Player 3, pawn 0, to be moved 4 spaces
+                game.movePawn(3, 0, 4); //Player 3, pawn 0, to be moved 4 spaces
             })
-            .should.throw('Player is not defined');
+                .should.
+            throw ('Player is not defined');
         });
 
-        it('should detect ilegal move (pawn doesn\'t exist)' , function () {
+        it('should detect ilegal move (pawn doesn\'t exist)', function() {
             (function() {
-                game.movePawn(0,5,4); //Player 0, pawn 5, to be moved 4 spaces
+                game.movePawn(0, 5, 4); //Player 0, pawn 5, to be moved 4 spaces
             })
-            .should.throw('Pawn is not defined');
+                .should.
+            throw ('Pawn is not defined');
         });
 
         it('Should be a circular array', function() {
@@ -125,7 +146,7 @@ describe('Parcheesi Core', function() {
             pawn.position = 67;
 
             game.throwDices();
-            game.movePawn(3,0,5);
+            game.movePawn(3, 0, 5);
 
             pawn.position.should.equal(4);
         });
