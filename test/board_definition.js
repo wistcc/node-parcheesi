@@ -1,4 +1,3 @@
-/*jshint strict: true, curly: false, node: true */
 /*global require, it, describe, beforeEach */
 
 //Important: these are the DOMINICAN REPUBLIC rules for playing 'parché'
@@ -53,7 +52,7 @@ describe('Parcheesi Core', function() {
         it('should have entry points for each stair color', function () {
             for (var i = CONSTANTS.colors.length - 1; i >= 0; i--) {
                 assert.notEqual(game.getStairEntrySpace(CONSTANTS.colors[i].name), false);
-                assert.notEqual(game.getStairEntrySpace(CONSTANTS.colors[i].name), undefined);
+                assert.notEqual(game.getStairEntrySpace(CONSTANTS.colors[i].name), 'undefined');
             }
         });
 
@@ -114,9 +113,7 @@ describe('Parcheesi Core', function() {
 
             (function() {
                 game.movePawn(0, 0, 4); //Player 0, pawn 0, to be moved 4 spaces    
-            })
-                .should.
-            throw ();
+            }).should.throw();
         });
 
         it('should detect ilegal move (player doesn\'t exist)', function() {

@@ -1,5 +1,4 @@
-/*jshint strict: true, curly: false, node: true */
-/*global require, console, module */
+
 
 'use strict';
 
@@ -254,7 +253,7 @@ module.exports = function ParcheesiGame(options) {
             //check for enemies and kill if possible
             //TODO: should this be on a method?
             var pawnsOnNextSpace = _und.filter(nextSpace.pawns, function(item) {
-                return item.color != pawn.color;
+                return item.color !== pawn.color;
             });
             if (pawnsOnNextSpace.length > 0 && !nextSpace.isSafe()) {
                 pawnsOnNextSpace[0].position = -1; //TODO: this is not always -1, look for a First() method on underscore
