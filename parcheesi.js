@@ -209,6 +209,20 @@ module.exports = function ParcheesiGame(options) {
             //Pawn to be moved should be on the board
             var currentPosition = pawn.position || -1;
             if (currentPosition === -1) {
+                var allPawnsInsideHome = true;
+
+                for (var i = 0; i < 4; i += 1) {
+                    if(player.pawns[i].position != -1){
+                        allPawnsInsideHome = false;
+                    }
+                }      
+
+                if(allPawnsInsideHome){
+                    //TODO: maybe the pawn could have an event emitter, and each time we 
+                    //change the position then it would simply move to the right position
+                    this.manageTurn(playerIndex, pawnIndex, -1, movesToMake);    
+                    return;
+                }
                 throw new Error('Pawn is still inside player\'s home');
             }
 

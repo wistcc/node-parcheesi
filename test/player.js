@@ -34,6 +34,9 @@ describe('Parcheesi Core', function() {
         });
 
         it('should not be able to throw the dices more than once per turn', function() {
+            game.players[0].pawns[1].position = 11;
+            game.players[0].pawns[2].position = 12;
+            game.players[0].pawns[3].position = 5;
             game.throwDices(0);
 
             (function() {

@@ -209,8 +209,17 @@ describe('Parcheesi Core', function() {
             game.currentTurn().should.not.eql(3);
         });
 
-        it.skip('should pass the turn if there aren\'t valid moves for the current player', function() {
-            assert.fail();
+        it('should pass the turn if there aren\'t valid moves for the current player', function() {
+            game = new ParcheesiGame({
+                startingTurn: 0,
+                numberOfPlayers: 3,
+                dices: [new dice(3), new dice(4)]                
+            });
+
+            //The user didn't get out any pawn from home and pass the turn
+            testUtils.emulatePlay(game, 0);
+
+            game.currentTurn().should.eql(1);
         });
 
         it('should assign the player another turn if a double is rolled', function() {

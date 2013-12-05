@@ -101,6 +101,9 @@ describe('Parcheesi Core', function() {
 
         it('should detect ilegal move (pawn isn\'t outside of the home)', function() {
             (function() {
+                game.players[0].pawns[1].position = 11;
+                game.players[0].pawns[2].position = 12;
+                game.players[0].pawns[3].position = 5;
                 game.movePawn(0, 0, 4); //Player 0, Pawn 0, to be moved 4 spaces
             })
                 .should.
